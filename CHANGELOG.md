@@ -4,6 +4,59 @@
 
 <!-- next version -->
 
+## v0.77.0
+
+### 🛑 Breaking changes 🛑
+
+- `exporterhelper`: Reduce the default queue size to 1000 from 5000 (#7359)
+  Affects any exporter which enables the queue by default and doesn't set its own default size.
+  For example: otlphttp.
+  
+- `featuregate`: Remove deprecated `RemovalVersion` and `WithRegisterRemovalVersion` functions. (#7587)
+
+### 💡 Enhancements 💡
+
+- `service`: Adds ResourceAttributes map to telemetry settings and thus CreateSettings. (#6599)
+- `service`: Allows users to disable high cardinality OTLP attributes behind a feature flag. (#7517)
+- `featuregate`: Finalize purpose of `toVersion`.  Allow stable gates to be explicitly set to true, but produce a warning log. (#7626)
+
+### 🧰 Bug fixes 🧰
+
+- `config/confighttp`: Ensure Auth RoundTripper follows compression/header changes (#7574)
+- `otlpreceiver`: do not reject requests having 'content-type' header with optional parameters (#7452)
+
+## v1.0.0-rcv0011/v0.76.1
+
+### 🛑 Breaking changes 🛑
+
+- `confmap`: Using an Invalid Scheme in a URI will throw an error. (#7504)
+
+### 🚩 Deprecations 🚩
+
+- `featuregate`: Deprecate Gate.RemovalVersion and WithRegisterRemovalVersion in favor of ToVersion. (#7043)
+
+### 💡 Enhancements 💡
+
+- `batchprocessor`: Support zero timeout. (#7508)
+  This allows the batchprocessor to limit request sizes without introducing delay in a pipeline, to act only as a splitter.
+- `service`: use the otel opencensus bridge when telemetry.useOtelForInternalMetrics is enabled (#7483)
+- `connector`: Mark 'service.connectors' featuregate as stable (#2336)
+- `featuregate`: Add a new Deprecated stage for feature gates, when features are abandoned. (#7043)
+- `loggingexporter`: Show more counters in not detailed verbosity (#7461)
+  The logging exporter now shows more counters when the verbosity is not detailed. The following numbers are added:
+  - Number of resource logs
+  - Number of resource spans
+  - Number of resource metrics
+  - Number of data points
+  
+- `configtls`: Reload mTLS ClientCA certificates on file change (#6524)
+- `confmap`: Add support for nested URIs. (#7117)
+- `featuregate`: Add concept of gate lifetime, [fromVersion, toVersion]. (#7043)
+
+### 🧰 Bug fixes 🧰
+
+- `obsreport`: fix issue where send_failed_requests counter was reporting an incorrect value. (#7456)
+
 ## v1.0.0-rc9/v0.75.0
 
 ### 🛑 Breaking changes 🛑
